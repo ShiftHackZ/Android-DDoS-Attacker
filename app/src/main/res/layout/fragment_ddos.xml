@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.shifthackz.android.attacker.presentation.fragment.ddos.DdosViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="com.shifthackz.android.attacker.attack.contract.AttackType" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
+        <ImageView
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/bg_bottom"
+            android:backgroundTint="@color/colorSecondary"
+            android:rotation="180"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/colorWhite"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTarget"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/hint_target"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintWidth_percent=".56"
+            app:validationError="@{viewModel.bindTargetError}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="@string/restriction_target"
+                android:maxLines="1"
+                android:text="@={viewModel.bindUiTarget}"
+                android:textColor="@color/colorWhite" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPort"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/hint_port"
+            app:layout_constraintBottom_toBottomOf="@+id/tilTarget"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tilTarget"
+            app:layout_constraintTop_toTopOf="@+id/tilTarget"
+            app:validationError="@{viewModel.bindPortError}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="@string/restriction_numbers"
+                android:inputType="number"
+                android:maxLength="5"
+                android:maxLines="1"
+                android:text="@={viewModel.bindUiPort}"
+                android:textColor="@color/colorWhite" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilThreads"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:hint="@string/hint_threads"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tilType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tilType"
+            app:layout_constraintTop_toTopOf="@+id/tilType"
+            app:validationError="@{viewModel.bindThreadsError}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="@string/restriction_numbers"
+                android:inputType="number"
+                android:maxLength="3"
+                android:maxLines="1"
+                android:text="@={viewModel.bindUiThreads}"
+                android:textColor="@color/colorWhite" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilType"
+            style="@style/Theme.DroidAttacker.Dropdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:hint="@string/hint_attack_type"
+            app:layout_constraintWidth_percent=".56"
+            app:layout_constraintStart_toStartOf="@+id/tilTarget"
+            app:layout_constraintTop_toBottomOf="@+id/tilTarget">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/etType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="none"
+                android:itemBackground="@color/colorBackground"
+                android:textColor="@color/colorWhite"
+                app:dropdownAttack="@{viewModel.bindUiAttack}"
+                app:dropdownItems="@{viewModel.bindUiAttacks}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/attackFormContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tilThreads">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProtocol"
+                style="@style/Theme.DroidAttacker.Dropdown"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:hint="@string/hint_protocol"
+                app:formAttack="@{AttackType.HTTP_FLOOD}"
+                app:formCurrent="@{viewModel.bindUiAttack}"
+                app:layout_constraintBottom_toBottomOf="@+id/tilTimeout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".56">
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/etProtocol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="none"
+                    android:itemBackground="@color/colorBackground"
+                    android:textColor="@color/colorWhite"
+                    app:dropdownItems="@{viewModel.bindUiProtocols}"
+                    app:dropdownProtocol="@{viewModel.bindUiProtocol}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTimeout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/hint_timeout"
+                app:formAttack="@{AttackType.HTTP_FLOOD}"
+                app:formCurrent="@{viewModel.bindUiAttack}"
+                app:layout_constraintBottom_toBottomOf="@+id/tilProtocol"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tilProtocol"
+                app:layout_constraintTop_toTopOf="parent"
+                app:validationError="@{viewModel.bindTimeoutError}">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="@string/restriction_numbers"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:maxLines="1"
+                    android:text="@={viewModel.bindUiTimeout}"
+                    android:textColor="@color/colorWhite" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilFloodMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:hint="@string/hint_syn_flood"
+                app:formAttack="@{AttackType.TCP_FLOOD}"
+                app:formCurrent="@{viewModel.bindUiAttack}"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="@={viewModel.bindUiFloodMessage}"
+                    android:textColor="@color/colorWhite" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLog"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:clickable="@{!viewModel.bindUiIsRunning}"
+            android:clipToPadding="false"
+            android:focusable="@{!viewModel.bindUiIsRunning}"
+            android:focusableInTouchMode="@{!viewModel.bindUiIsRunning}"
+            android:overScrollMode="never"
+            android:paddingBottom="22dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/guideLineBottomRound"
+            app:layout_constraintTop_toBottomOf="@+id/attackFormContainer"
+            app:reverseLayout="true"
+            tools:itemCount="20"
+            tools:listitem="@layout/item_log_entry" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineBottomRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".715" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineBottomCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".79" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".90" />
+
+        <View
+            android:id="@+id/viewBottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_bottom"
+            android:backgroundTint="@color/colorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent=".3" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideLineBottom"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/btnProgress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:indeterminateTint="@color/colorChartLine"
+            android:visibility="@{viewModel.bindUiIsRunning ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/guideLineBottom"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideLineBottomRound" />
+
+        <ImageButton
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="14dp"
+            android:background="@drawable/bg_circle_btn_stop"
+            android:onClick="@{() -> viewModel.stop()}"
+            android:src="@drawable/ic_stop"
+            android:visibility="@{viewModel.bindUiIsRunning ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/guideLineBottom"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideLineBottomRound"
+            app:tint="#FF0000" />
+
+        <ImageButton
+            android:id="@+id/btnStart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="14dp"
+            android:background="@drawable/bg_circle_btn_attack"
+            android:onClick="@{() -> viewModel.start()}"
+            android:src="@drawable/ic_power"
+            android:visibility="@{viewModel.bindUiIsRunning ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/guideLineBottom"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideLineBottomRound"
+            app:tint="#A9FF46" />
+
+        <TextView
+            android:id="@+id/tvHintPacketsSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stats_packets_total"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@+id/guideLineBottomCenter"
+            app:layout_constraintEnd_toStartOf="@+id/btnProgress"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvHint2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stats_packets_per_second"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toTopOf="@+id/guideLineBottomCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnProgress" />
+
+        <TextView
+            android:id="@+id/tvPackets"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@{viewModel.bindUiPackets}"
+            android:textColor="@color/colorWhite"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toStartOf="@+id/btnProgress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideLineBottomCenter"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/tvAttackTimer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@{viewModel.bindUiPps}"
+            android:textColor="@color/colorWhite"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnProgress"
+            app:layout_constraintTop_toTopOf="@+id/guideLineBottomCenter"
+            tools:text="0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,63 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.DroidAttacker" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorBackground</item>
+        <item name="colorPrimaryVariant">@color/colorSecondary</item>
+        <item name="textInputStyle">@style/Theme.DroidAttacker.TextInput.Value</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="Theme.DroidAttacker.TextInput.Value" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/colorInput</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="hintTextColor">@color/colorHint</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="Theme.DroidAttacker.Dropdown" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:background">@drawable/bg_dropdown_selector</item>
+        <item name="boxBackgroundColor">@color/colorInput</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="errorEnabled">false</item>
+        <item name="hintTextColor">@color/colorHint</item>
+        <item name="materialThemeOverlay">@style/Theme.DroidAttacker.Dropdown.ThemeOverlay</item>
+        <item name="endIconCheckable">true</item>
+        <item name="endIconDrawable">@drawable/ic_dropdown_selector</item>
+        <item name="endIconTint">@color/colorHint</item>
+    </style>
+
+    <style name="Theme.DroidAttacker.Dropdown.ThemeOverlay" parent="">
+        <item name="autoCompleteTextViewStyle">
+            @style/Theme.DroidAttacker.Dropdown.ThemeOverlay.AutoCompleteTextView
+        </item>
+    </style>
+
+    <style name="Theme.DroidAttacker.Dropdown.ThemeOverlay.AutoCompleteTextView" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:background">@null</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.DroidAttacker.Dropdown.Item" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:padding">16dp</item>
+    </style>
+</resources>

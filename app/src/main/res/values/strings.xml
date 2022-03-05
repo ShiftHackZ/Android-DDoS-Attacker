@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Attacker</string>
+    <string name="hint_target">Target (IP or hostname)</string>
+    <string name="hint_port">Port</string>
+    <string name="hint_threads">Threads</string>
+    <string name="hint_timeout">Timeout (ms)</string>
+    <string name="hint_attack_type">Attack type</string>
+    <string name="hint_protocol">Protocol</string>
+    <string name="hint_syn_flood">SYN Flood Message</string>
+    <string name="stats_packets_total">Total hits</string>
+    <string name="stats_packets_per_second">Packets / sec</string>
+
+    <string name="restriction_numbers">0123456789</string>
+    <string name="restriction_target">abcdefghijklmnopqrstuvwxyz.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+
+    <string name="error_invalid_ip">Invalid IP address</string>
+    <string name="error_invalid_domain">Invalid domain name</string>
+
+    <string name="empty_timeout">Timeout not set</string>
+    <string name="empty_port">Port not set</string>
+    <string name="empty_threads">Threads not set</string>
+    <string name="zero_timeout">Timeout can\'t be 0</string>
+    <string name="zero_port">Port can\'t be 0</string>
+    <string name="zero_threads">Threads can\'t be 0</string>
+    <string name="large_port">Port can\'t be larger than 65535</string>
+</resources>

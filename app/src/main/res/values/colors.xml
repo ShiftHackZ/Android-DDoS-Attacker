@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBlack">#FF000000</color>
+    <color name="colorWhite">#FFFFFFFF</color>
+    <color name="colorHint">#CDCDCD</color>
+    <color name="colorBackground">#1C0C42</color>
+    <color name="colorInput">#2F1470</color>
+    <color name="colorSecondary">#2E1475</color>
+    <color name="colorChartLine">#765DFF</color>
+    <color name="colorLogMessage">#00ff00</color>
+    <color name="colorLogError">#FF0000</color>
+</resources>
