@@ -33,7 +33,7 @@ class TargetValidation : FieldValidation {
     }
 
     private fun hasOnlyDigits(value: String): Boolean {
-        val parsedInt = value.replace(".", "").toIntOrNull()
+        val parsedInt = value.replace(".", "").toLongOrNull()
         return parsedInt?.let { true } ?: false
     }
 
